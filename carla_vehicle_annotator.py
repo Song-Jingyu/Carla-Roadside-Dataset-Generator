@@ -500,6 +500,13 @@ def save_output(carla_img, bboxes, vehicle_class=None, old_bboxes=None, old_vehi
             os.makedirs(os.path.dirname(filename))
         image.save(filename)
 
+def ensure_safe_bound(val):
+    if val > 1:
+        val = 1
+    if val < 0:
+        val = 0
+    return val
+
 ### Use this function to save bounding box result in darknet training format
 def save2darknet(bboxes, vehicle_class, carla_img, data_path = '', cc_rgb = carla.ColorConverter.Raw, save_train = False, customName=''):
     # check whether target path exists
