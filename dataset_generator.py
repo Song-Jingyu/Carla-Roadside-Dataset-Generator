@@ -41,14 +41,14 @@ def retrieve_data(sensor_queue, frame, timeout=5):
 
 class dataset_generator:
     
-    def __init__(self, num_vehicles, world_map):
+    def __init__(self, num_vehicles, world_map, tick_sensor):
         # parameters for saving sensor data
         # TODO: can be improved by reading them from yaml file
         self.save_rgb = True
         self.save_depth = False
         self.save_segm = False
         self.save_lidar = False
-        self.tick_sensor = 1
+        self.tick_sensor = tick_sensor
         self.host = '127.0.0.1'
         self.port = 2000
         self.tm_port = 8000
@@ -68,6 +68,7 @@ class dataset_generator:
         # set
         print('\nRUNNING in synchronous mode\n')
         self.settings = self.world.get_settings()
+        
         self.traffic_manager.set_synchronous_mode(True)
         if not self.settings.synchronous_mode:
             self.synchronous_master = True
@@ -76,6 +77,8 @@ class dataset_generator:
             self.world.apply_settings(self.settings)
         else:
             self.synchronous_master = False
+        
+        print(self.settings.fixed_delta_seconds)
 
         self.blueprints = self.world.get_blueprint_library().filter('vehicle.*')
         self.spawn_points = self.world.get_map().get_spawn_points()

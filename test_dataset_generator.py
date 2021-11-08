@@ -11,6 +11,7 @@ WORLD = 'Town02'
 CAM_T = [88.933, 304.54, 8.327]
 CAM_O = [-11.5386, 3.396858, 0]
 IS_DARKNET = True
+TICK_SENSOR = 0
 
 # weathers = [carla.WeatherParameters.ClearNoon, \
 #     carla.WeatherParameters.CloudyNoon, \
@@ -28,6 +29,6 @@ IS_DARKNET = True
 #     carla.WeatherParameters.SoftRainSunset]
 
 if __name__ == "__main__":
-    dg = dataset_generator(NUM_OF_VEHICLES, WORLD)
+    dg = dataset_generator(NUM_OF_VEHICLES, WORLD, TICK_SENSOR)
     
     dg.start_simulation(CAM_T, CAM_O, IS_DARKNET, NUM_OF_FRAMES)
