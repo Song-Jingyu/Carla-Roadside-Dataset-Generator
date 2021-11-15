@@ -249,13 +249,23 @@ class dataset_generator:
                             depth_img.save_to_disk('out_depth/%06d.png' % depth_img.frame, cc_depth_log)
                         depth_meter = cva.extract_depth(depth_img)
                         filtered, removed =  cva.auto_annotate(vehicles, cam, depth_meter, json_path='vehicle_class_json_file.txt')
+
+                        # print(filtered['3dbbox'])
+                        # print(filtered['vehicles'])
+                        # filtered_vehicles = filtered['vehicles']
+                        # for vehicle in filtered_vehicles:
+                        #     bb_cords = cva.create_bb_points(vehicle)
+
                         
                         if is_in_darknet:
                             cva.save2darknet(filtered['bbox'], filtered['class'], rgb_img)
                         else:
                             cva.save_output(rgb_img, filtered['bbox'], filtered['class'], removed['bbox'], removed['class'], save_patched=True, out_format='json')
                         
+                        # save 3d bbox
+                        np.save("data/obj/"+'%06d_3d.npy' % rgb_img.frame, filtered['3dbbox'])
 
+                        
                         # Save segmentation image
                         if self.save_segm:
                             segm_img = data[segm_idx]
