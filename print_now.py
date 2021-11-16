@@ -33,7 +33,8 @@ _SLEEP_TIME_ = 1
 def main():
 	client = carla.Client(_HOST_, _PORT_)
 	client.set_timeout(2.0)
-	world = client.get_world()
+	world = client.load_world('Town02')
+
 	
 	# print(help(t))
 	# print("(x,y,z) = ({},{},{})".format(t.location.x, t.location.y,t.location.z))

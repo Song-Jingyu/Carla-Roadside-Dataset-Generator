@@ -264,6 +264,7 @@ class dataset_generator:
                         
                         # save 3d bbox
                         np.save("data/obj/"+'%06d_3d.npy' % rgb_img.frame, filtered['3dbbox'])
+                        np.save("data/obj/"+'%06d_id.npy' % rgb_img.frame, filtered['id'])
 
                         
                         # Save segmentation image
