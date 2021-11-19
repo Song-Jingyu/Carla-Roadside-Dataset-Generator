@@ -317,12 +317,15 @@ def filter_occlusion_bbox(bounding_boxes, vehicles, sensor, depth_img, v_class=N
             removed_vehicles.append(v)
     
     vehicle_3d_bbox = []
+    vehicle_id = []
     for vehicle in filtered_vehicles:
+        vehicle_id.append(vehicle.id)
         bb_cords = create_bb_points(vehicle)
         world_cords = vehicle_to_world(bb_cords,vehicle)
         vehicle_3d_bbox.append(world_cords)
     
-
+    
+    filtered_out['id'] = vehicle_id
     filtered_out['3dbbox'] = vehicle_3d_bbox
     filtered_out['bbox']=filtered_bboxes
     filtered_out['vehicles']=filtered_vehicles
