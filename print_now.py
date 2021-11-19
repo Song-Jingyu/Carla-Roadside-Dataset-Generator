@@ -22,6 +22,12 @@ except IndexError:
 # -- imports -------------------------------------------------------------------
 # ==============================================================================
 
+# Transform(Location(x=108.859444, y=243.846329, z=9.039239), Rotation(pitch=-7.108888, yaw=-24.839268, roll=0.000170))
+
+# Transform(Location(x=139.268784, y=241.208359, z=7.610488), Rotation(pitch=-18.796810, yaw=-138.667511, roll=0.000178))
+
+# Transform(Location(x=137.371368, y=243.293045, z=6.444705), Rotation(pitch=-18.272455, yaw=-134.825333, roll=0.000058))
+
 
 import carla
 
@@ -31,7 +37,10 @@ _SLEEP_TIME_ = 1
 
 
 def main():
+
 	client = carla.Client(_HOST_, _PORT_)
+	print(client.get_available_maps())
+
 	client.set_timeout(2.0)
 	world = client.load_world('Town02')
 
